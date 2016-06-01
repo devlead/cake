@@ -127,6 +127,17 @@ Task("Run-Unit-Tests")
         XmlReportV1 = true,
         NoAppDomain = true
     });
+    if (BuildSystem.AppVeyor.IsRunningOnAppVeyor)
+    {
+        foreach(var testResult in GetFiles(parameters.Paths.Directories.TestResults.FullPath + "/*.xml"))
+        {
+            Information("Running on AppVeyor uploading test result: {0}", testResult);
+            CakeExecuteExpression(
+                "BuildSystem.AppVeyor.UploadTestResults(\"" + testResult.FullPath + "\" , AppVeyorTestResultsType.XUnit);",
+                new CakeSettings { ToolPath = "./src/Cake/bin/Release/Cake.exe" }
+                );
+        }
+    }
 });
 
 

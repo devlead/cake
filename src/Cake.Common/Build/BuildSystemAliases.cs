@@ -82,6 +82,8 @@ namespace Cake.Common.Build
         /// <param name="context">The context.</param>
         /// <returns>A <see cref="Cake.Common.Build.TeamCity"/> instance.</returns>
         [CakePropertyAlias(Cache = true)]
+        [CakeNamespaceImport("Cake.Common.Build.AppVeyor")]
+        [CakeNamespaceImport("Cake.Common.Build.AppVeyor.Data")]
         public static ITeamCityProvider TeamCity(this ICakeContext context)
         {
             if (context == null)
