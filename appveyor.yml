@@ -18,6 +18,7 @@ branches:
     - /r/.*/
     - /release/.*/
     - /hotfix/.*/
+    - robertcoltheart-feature/appveyor-test-results
 
 # Build cache
 cache:
