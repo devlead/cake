@@ -391,3 +391,8 @@ Task("ReleaseNotes")
 //////////////////////////////////////////////////////////////////////
 
 RunTarget(parameters.Target);
+
+CakeExecuteScript(
+    "./testcore.cake",
+    new CakeSettings{ ToolPath="./src/Cake/bin/" + parameters.Configuration + "/Cake.exe" }
+);

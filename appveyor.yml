@@ -18,6 +18,7 @@ branches:
     - /r/.*/
     - /release/.*/
     - /hotfix/.*/
+    - adamhathcock-fix_dotnet_restore_settings
 
 # Build cache
 cache:
