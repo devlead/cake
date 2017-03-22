@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
@@ -39,14 +38,8 @@ namespace Cake.Common.Tools.VSWhere.Latest
             {
                 throw new ArgumentNullException(nameof(settings));
             }
-            IEnumerable<string> installationPaths = new List<string>();
-            Run(settings, GetArguments(settings), new ProcessSettings { RedirectStandardOutput = true },
-                process => installationPaths = process.GetStandardOutput());
-            if (installationPaths.Any())
-            {
-                return installationPaths.First();
-            }
-            return null;
+
+            return RunVSWhere(settings, GetArguments(settings)).FirstOrDefault();
         }
 
         private ProcessArgumentBuilder GetArguments(VSWhereLatestSettings settings)

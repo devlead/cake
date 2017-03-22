@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cake.Common.Tools.VSWhere.All;
 using Cake.Common.Tools.VSWhere.Latest;
@@ -63,7 +62,7 @@ namespace Cake.Common.Tools.VSWhere
         [CakeMethodAlias]
         [CakeAliasCategory("Legacy")]
         [CakeNamespaceImport("Cake.Common.Tools.VSWhere.Legacy")]
-        public static IEnumerable<FilePath> VSWhereLegacy(this ICakeContext context, VSWhereLegacySettings settings)
+        public static FilePathCollection VSWhereLegacy(this ICakeContext context, VSWhereLegacySettings settings)
         {
             if (context == null)
             {
@@ -135,7 +134,7 @@ namespace Cake.Common.Tools.VSWhere
         [CakeMethodAlias]
         [CakeAliasCategory("All")]
         [CakeNamespaceImport("Cake.Common.Tools.VSWhere.All")]
-        public static IEnumerable<FilePath> VSWhereAll(this ICakeContext context)
+        public static FilePathCollection VSWhereAll(this ICakeContext context)
         {
             var settings = new VSWhereAllSettings();
             return VSWhereAll(context, settings);
@@ -155,7 +154,7 @@ namespace Cake.Common.Tools.VSWhere
         [CakeMethodAlias]
         [CakeAliasCategory("All")]
         [CakeNamespaceImport("Cake.Common.Tools.VSWhere.All")]
-        public static IEnumerable<FilePath> VSWhereAll(this ICakeContext context, VSWhereAllSettings settings)
+        public static FilePathCollection VSWhereAll(this ICakeContext context, VSWhereAllSettings settings)
         {
             if (context == null)
             {
@@ -185,7 +184,7 @@ namespace Cake.Common.Tools.VSWhere
         [CakeMethodAlias]
         [CakeAliasCategory("Product")]
         [CakeNamespaceImport("Cake.Common.Tools.VSWhere.Product")]
-        public static IEnumerable<FilePath> VSWhereProducts(this ICakeContext context, string products)
+        public static FilePathCollection VSWhereProducts(this ICakeContext context, string products)
         {
             var settings = new VSWhereProductSettings();
             return VSWhereProducts(context, products, settings);
@@ -206,7 +205,7 @@ namespace Cake.Common.Tools.VSWhere
         [CakeMethodAlias]
         [CakeAliasCategory("Product")]
         [CakeNamespaceImport("Cake.Common.Tools.VSWhere.Product")]
-        public static IEnumerable<FilePath> VSWhereProducts(this ICakeContext context, string products, VSWhereProductSettings settings)
+        public static FilePathCollection VSWhereProducts(this ICakeContext context, string products, VSWhereProductSettings settings)
         {
             if (context == null)
             {

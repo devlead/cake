@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -33,20 +31,14 @@ namespace Cake.Common.Tools.VSWhere.Legacy
         /// </summary>
         /// <param name="settings">The settings.</param>
         /// <returns>Installation paths for all instances.</returns>
-        public IEnumerable<FilePath> Legacy(VSWhereLegacySettings settings)
+        public FilePathCollection Legacy(VSWhereLegacySettings settings)
         {
             if (settings == null)
             {
                 throw new ArgumentNullException(nameof(settings));
             }
-            IEnumerable<string> installationPaths = new List<string>();
-            Run(settings, GetArguments(settings), new ProcessSettings { RedirectStandardOutput = true },
-                process => installationPaths = process.GetStandardOutput());
-            if (installationPaths.Any())
-            {
-                return installationPaths.Select(x => new FilePath(x));
-            }
-            return new List<FilePath>();
+
+            return RunVSWhere(settings, GetArguments(settings));
         }
 
         private ProcessArgumentBuilder GetArguments(VSWhereLegacySettings settings)

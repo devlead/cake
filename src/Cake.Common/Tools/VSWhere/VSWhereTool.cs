@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.Globalization;
-using Cake.Common.Tools.Chocolatey;
+using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -50,6 +49,22 @@ namespace Cake.Common.Tools.VSWhere
         protected override IEnumerable<string> GetToolExecutableNames()
         {
             return new[] { "vswhere.exe" };
+        }
+
+        /// <summary>
+        /// Runs VSWhere with supplied arguments and parses installation paths
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <param name="builder">The process argument builder.</param>
+        /// <returns>The parsed file paths.</returns>
+        protected FilePathCollection RunVSWhere(TSettings settings, ProcessArgumentBuilder builder)
+        {
+            IEnumerable<string> installationPaths = null;
+            Run(settings, builder, new ProcessSettings { RedirectStandardOutput = true },
+                process => installationPaths = process.GetStandardOutput());
+
+            return new FilePathCollection(installationPaths?.Select(FilePath.FromString) ?? Enumerable.Empty<FilePath>(),
+                PathComparer.Default);
         }
 
         /// <summary>
