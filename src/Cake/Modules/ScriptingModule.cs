@@ -10,9 +10,6 @@ using Cake.Core.Scripting;
 using Cake.Scripting.XPlat;
 #else
 using Cake.Scripting.Mono;
-using Cake.Scripting.Roslyn;
-using Cake.Scripting.Roslyn.Nightly;
-using Cake.Scripting.Roslyn.Stable;
 #endif
 
 namespace Cake.Modules
@@ -50,21 +47,7 @@ namespace Cake.Modules
             }
             else
             {
-                // Roslyn
-                registrar.RegisterType<RoslynScriptEngine>().As<IScriptEngine>().Singleton();
-
-                if (_options.PerformDebug)
-                {
-                    // Debug
-                    registrar.RegisterType<DebugRoslynScriptSessionFactory>().As<RoslynScriptSessionFactory>().Singleton();
-                    registrar.RegisterType<DebugRoslynNightlyScriptSessionFactory>().As<RoslynNightlyScriptSessionFactory>().Singleton();
-                }
-                else
-                {
-                    // Default
-                    registrar.RegisterType<DefaultRoslynScriptSessionFactory>().As<RoslynScriptSessionFactory>().Singleton();
-                    registrar.RegisterType<DefaultRoslynNightlyScriptSessionFactory>().As<RoslynNightlyScriptSessionFactory>().Singleton();
-                }
+                throw new NotImplementedException("Roslyn Scripting engine temporily removed :)");
             }
 #endif
         }
