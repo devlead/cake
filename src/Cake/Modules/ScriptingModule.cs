@@ -5,9 +5,9 @@
 using System;
 using Cake.Core.Composition;
 using Cake.Core.Scripting;
-
+using Cake.Scripting.Roslyn;
 #if NETCORE
-using Cake.Scripting.XPlat;
+
 #endif
 
 namespace Cake.Modules
@@ -29,7 +29,7 @@ namespace Cake.Modules
             }
 
 #if NETCORE
-            registrar.RegisterType<XPlatScriptEngine>().As<IScriptEngine>().Singleton();
+            registrar.RegisterType<RoslynScriptEngine>().As<IScriptEngine>().Singleton();
 #else
             throw new NotImplementedException("Scripting removed from full .NET Framework. Sorry :)");
 #endif

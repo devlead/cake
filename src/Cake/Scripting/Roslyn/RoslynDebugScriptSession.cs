@@ -18,14 +18,13 @@ using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.Reflection;
 using Cake.Core.Scripting;
-using Cake.Scripting.Roslyn;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Emit;
 
-namespace Cake.Scripting.XPlat
+namespace Cake.Scripting.Roslyn
 {
-    internal sealed class DebugXPlatScriptSession : XPlatScriptSession
+    internal sealed class RoslynDebugScriptSession : RoslynScriptSessionBase
     {
         private const string CompiledType = "Submission#0";
         private const string CompiledMethod = "<Factory>";
@@ -33,7 +32,7 @@ namespace Cake.Scripting.XPlat
         private readonly IScriptHost _host;
         private readonly ICakeLog _log;
 
-        public DebugXPlatScriptSession(IScriptHost host, IAssemblyLoader loader, ICakeLog log)
+        public RoslynDebugScriptSession(IScriptHost host, IAssemblyLoader loader, ICakeLog log)
             : base(loader, log)
         {
             _host = host;

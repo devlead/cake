@@ -11,9 +11,9 @@ using Cake.Core.IO;
 using Cake.Core.Reflection;
 using Cake.Core.Scripting;
 
-namespace Cake.Scripting.XPlat
+namespace Cake.Scripting.Roslyn
 {
-    internal abstract class XPlatScriptSession : IScriptSession
+    internal abstract class RoslynScriptSessionBase : IScriptSession
     {
         private readonly IAssemblyLoader _loader;
         private readonly ICakeLog _log;
@@ -24,7 +24,7 @@ namespace Cake.Scripting.XPlat
 
         public HashSet<string> Namespaces { get; }
 
-        protected XPlatScriptSession(IAssemblyLoader loader, ICakeLog log)
+        protected RoslynScriptSessionBase(IAssemblyLoader loader, ICakeLog log)
         {
             _loader = loader;
             _log = log;

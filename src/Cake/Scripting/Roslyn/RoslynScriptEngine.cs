@@ -8,15 +8,15 @@ using Cake.Core.Diagnostics;
 using Cake.Core.Reflection;
 using Cake.Core.Scripting;
 
-namespace Cake.Scripting.XPlat
+namespace Cake.Scripting.Roslyn
 {
-    internal sealed class XPlatScriptEngine : IScriptEngine
+    internal sealed class RoslynScriptEngine : IScriptEngine
     {
         private readonly CakeOptions _options;
         private readonly IAssemblyLoader _loader;
         private readonly ICakeLog _log;
 
-        public XPlatScriptEngine(CakeOptions options, IAssemblyLoader loader, ICakeLog log)
+        public RoslynScriptEngine(CakeOptions options, IAssemblyLoader loader, ICakeLog log)
         {
             _options = options;
             _loader = loader;
@@ -27,9 +27,9 @@ namespace Cake.Scripting.XPlat
         {
             if (_options.PerformDebug)
             {
-                return new DebugXPlatScriptSession(host, _loader, _log);
+                return new RoslynDebugScriptSession(host, _loader, _log);
             }
-            return new DefaultXPlatScriptSession(host, _loader, _log);
+            return new RoslynScriptSession(host, _loader, _log);
         }
     }
 }
