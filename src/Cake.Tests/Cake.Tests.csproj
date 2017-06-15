@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>Cake.Tests</AssemblyName>
+    <TargetFrameworks>net462;netcoreapp1.0</TargetFrameworks>
     <PlatformTarget>AnyCpu</PlatformTarget>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <IsCakeTestProject>true</IsCakeTestProject>
@@ -28,7 +29,7 @@
   </ItemGroup>
 
   <!-- .NET Framework packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System" />
     <Reference Include="System.IO" />
     <Reference Include="System.Runtime" />

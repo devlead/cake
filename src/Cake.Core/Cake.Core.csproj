@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>Cake.Core</AssemblyName>
+    <TargetFrameworks>net462;netstandard1.6</TargetFrameworks>
     <OutputType>Library</OutputType>
     <PlatformTarget>AnyCpu</PlatformTarget>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -16,7 +17,7 @@
   <Import Project="..\Shared.msbuild" />
 
   <!-- .NET Core packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetStandardVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.3.0" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
@@ -25,7 +26,7 @@
   </ItemGroup>
 
   <!-- .NET Framework packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />

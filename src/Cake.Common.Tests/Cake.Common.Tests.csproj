@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PlatformTarget>anycpu</PlatformTarget>
     <AssemblyName>Cake.Common.Tests</AssemblyName>
+    <TargetFrameworks>net462;netcoreapp1.0</TargetFrameworks>
+    <PlatformTarget>anycpu</PlatformTarget>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <IsCakeTestProject>true</IsCakeTestProject>
   </PropertyGroup>
@@ -28,7 +29,7 @@
   </ItemGroup>
 
   <!-- .NET Framework packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime" />

@@ -1,19 +1,5 @@
 <Project>
 
-  <!-- Framework variables -->
-  <PropertyGroup>
-    <CakeNetFrameworkVersion>net462</CakeNetFrameworkVersion>
-    <CakeNetFrameworkVersionNumber>4.6.2</CakeNetFrameworkVersionNumber>
-    <CakeNetStandardVersion>netstandard1.6</CakeNetStandardVersion>
-    <CakeNetCoreAppVersion>netcoreapp1.0</CakeNetCoreAppVersion>
-  </PropertyGroup>
-
-  <!-- Target framework -->
-  <PropertyGroup>
-    <TargetFrameworks Condition="'$(OutputType)' == 'Exe' OR '$(IsCakeTestProject)' == 'true'">$(CakeNetFrameworkVersion);$(CakeNetCoreAppVersion)</TargetFrameworks>
-    <TargetFrameworks Condition="$(TargetFrameworks) == '' AND '$(OutputType)' == 'Library'">$(CakeNetFrameworkVersion);$(CakeNetStandardVersion)</TargetFrameworks>
-  </PropertyGroup>
-
   <!-- General package metadata -->
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
@@ -36,12 +22,12 @@
   </PropertyGroup>
 
   <!-- Targeting packs for building on Mono -->
-  <PropertyGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <RuntimeIdentifiers>win7-x64;win7-x86;osx.10.11-x64;ubuntu.14.04-x64;ubuntu.16.04-x64;ubuntu.16.10-x64;centos.7-x64;rhel.7.2-x64;debian.8-x64;fedora.23-x64;fedora.24-x64;opensuse.13.2-x64;opensuse.42.1-x64</RuntimeIdentifiers>
-    <FrameworkPathOverride>$(NuGetPackageFolders)microsoft.targetingpack.netframework.v$(CakeNetFrameworkVersionNumber)\1.0.1\lib\$(CakeNetFrameworkVersion)\</FrameworkPathOverride>
+    <FrameworkPathOverride>$(NuGetPackageFolders)microsoft.targetingpack.netframework.v4.6.2\1.0.1\lib\net462\</FrameworkPathOverride>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
-    <PackageReference Include="Microsoft.TargetingPack.NETFramework.v$(CakeNetFrameworkVersionNumber)" Version="1.0.1" ExcludeAssets="All" PrivateAssets="All" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
+    <PackageReference Include="Microsoft.TargetingPack.NETFramework.v4.6.2" Version="1.0.1" ExcludeAssets="All" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Global solution information -->

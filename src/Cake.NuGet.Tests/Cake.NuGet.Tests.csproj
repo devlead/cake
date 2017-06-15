@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>Cake.NuGet.Tests</AssemblyName>
+    <TargetFrameworks>net462;netcoreapp1.0</TargetFrameworks>
     <PlatformTarget>AnyCpu</PlatformTarget>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <IsCakeTestProject>true</IsCakeTestProject>
@@ -28,12 +29,12 @@
   </ItemGroup>
 
   <!-- .NET Core packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetCoreAppVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
     <PackageReference Include="NuGet.Client" Version="4.0.0" />
   </ItemGroup>
 
   <!-- .NET Framework packages -->
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(CakeNetFrameworkVersion)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading.Tasks" />
