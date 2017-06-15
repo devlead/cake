@@ -6,21 +6,11 @@ using System;
 using Cake.Core.Composition;
 using Cake.Core.Scripting;
 using Cake.Scripting.Roslyn;
-#if NETCORE
-
-#endif
 
 namespace Cake.Modules
 {
     internal sealed class ScriptingModule : ICakeModule
     {
-        private readonly CakeOptions _options;
-
-        public ScriptingModule(CakeOptions options)
-        {
-            _options = options ?? new CakeOptions();
-        }
-
         public void Register(ICakeContainerRegistrar registrar)
         {
             if (registrar == null)
@@ -28,11 +18,7 @@ namespace Cake.Modules
                 throw new ArgumentNullException(nameof(registrar));
             }
 
-#if NETCORE
             registrar.RegisterType<RoslynScriptEngine>().As<IScriptEngine>().Singleton();
-#else
-            throw new NotImplementedException("Scripting removed from full .NET Framework. Sorry :)");
-#endif
         }
     }
 }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.IO;
 using System.Reflection;
 using Cake.Core.IO;
 using Cake.Core.Polyfill;
@@ -40,6 +41,11 @@ namespace Cake.Core.Reflection
                 _verifier.Verify(assembly);
             }
             return assembly;
+        }
+
+        public Assembly LoadFromStream(MemoryStream assemblyStream, MemoryStream symbolStream)
+        {
+            throw new NotImplementedException();
         }
     }
 }

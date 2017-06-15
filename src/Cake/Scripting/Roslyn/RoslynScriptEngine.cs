@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-#if NETCORE
 using System.Collections.Generic;
 using Cake.Core.Diagnostics;
 using Cake.Core.Reflection;
@@ -33,4 +32,3 @@ namespace Cake.Scripting.Roslyn
         }
     }
 }
-#endif
