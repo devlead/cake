@@ -8,8 +8,6 @@ using Cake.Core.Scripting;
 
 #if NETCORE
 using Cake.Scripting.XPlat;
-#else
-using Cake.Scripting.Mono;
 #endif
 
 namespace Cake.Modules
@@ -33,22 +31,7 @@ namespace Cake.Modules
 #if NETCORE
             registrar.RegisterType<XPlatScriptEngine>().As<IScriptEngine>().Singleton();
 #else
-            // Are we running on Mono?
-            var mono = _options.Mono;
-            if (!mono)
-            {
-                mono = Type.GetType("Mono.Runtime") != null;
-            }
-
-            if (mono)
-            {
-                // Mono compiler
-                registrar.RegisterType<MonoScriptEngine>().As<IScriptEngine>().Singleton();
-            }
-            else
-            {
-                throw new NotImplementedException("Roslyn Scripting engine temporily removed :)");
-            }
+            throw new NotImplementedException("Scripting removed from full .NET Framework. Sorry :)");
 #endif
         }
     }
