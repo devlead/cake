@@ -198,7 +198,7 @@ Task("Create-Chocolatey-Packages")
             Version = parameters.Version.SemVersion,
             ReleaseNotes = parameters.ReleaseNotes.Notes.ToArray(),
             OutputDirectory = parameters.Paths.Directories.NugetRoot,
-            Files = parameters.Paths.ChocolateyFiles
+            //Files = parameters.Paths.ChocolateyFiles
         });
     }
 });
@@ -236,13 +236,19 @@ Task("Create-NuGet-Packages")
     });
 
     // Cake - .NET 4.5
+    var netFxFullArtifactPath = MakeAbsolute(parameters.Paths.Directories.ArtifactsBinNet45).FullPath;
+    var netFxFullArtifactPathLength = netFxFullArtifactPath.Length+1;
     NuGetPack("./nuspec/Cake.nuspec", new NuGetPackSettings {
         Version = parameters.Version.SemVersion,
         ReleaseNotes = parameters.ReleaseNotes.Notes.ToArray(),
-        BasePath = parameters.Paths.Directories.ArtifactsBinNet45,
+        BasePath = netFxFullArtifactPath,
         OutputDirectory = parameters.Paths.Directories.NugetRoot,
         Symbols = false,
-        NoPackageAnalysis = true
+        NoPackageAnalysis = true,
+        Files = GetFiles(netFxFullArtifactPath + "/**/*")
+                                .Select(file=>file.FullPath.Substring(netFxFullArtifactPathLength))
+                                .Select(file=> new NuSpecContent { Source = file, Target = file })
+                                .ToArray()
     });
 
     // Cake Symbols - .NET Core
