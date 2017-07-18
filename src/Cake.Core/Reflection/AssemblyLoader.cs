@@ -25,12 +25,7 @@ namespace Cake.Core.Reflection
 
         public Assembly Load(AssemblyName assemblyName)
         {
-            if (assemblyName == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyName));
-            }
-
-            return Assembly.Load(assemblyName);
+            return AssemblyHelper.LoadAssembly(assemblyName);
         }
 
         public Assembly Load(FilePath path, bool verify)

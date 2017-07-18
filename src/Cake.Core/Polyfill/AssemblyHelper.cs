@@ -25,6 +25,15 @@ namespace Cake.Core.Polyfill
 #endif
         }
 
+        public static Assembly LoadAssembly(AssemblyName assemblyName)
+        {
+            if (assemblyName == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyName));
+            }
+            return Assembly.Load(assemblyName);
+        }
+
         public static Assembly LoadAssembly(ICakeEnvironment environment, IFileSystem fileSystem, FilePath path)
         {
 #if NETCORE
@@ -51,10 +60,18 @@ namespace Cake.Core.Polyfill
 
         public static Assembly LoadAssembly(Stream assemblyStream, Stream symbolStream)
         {
+            if (assemblyStream == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyStream));
+            }
+            if (symbolStream == null)
+            {
+                throw new ArgumentNullException(nameof(symbolStream));
+            }
 #if NETCORE
             return AssemblyLoadContext.Default.LoadFromStream(assemblyStream, symbolStream);
 #else
-            return Assembly.Load(assemblyStream.ToArray(), symbolStream.ToArray());
+            return AppDomain.CurrentDomain.Load(assemblyStream.ToArray(), symbolStream.ToArray());
 #endif
         }
     }

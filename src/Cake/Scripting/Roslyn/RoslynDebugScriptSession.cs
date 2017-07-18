@@ -14,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using Cake.Core;
 using Cake.Core.Diagnostics;
+using Cake.Core.IO;
 using Cake.Core.Reflection;
 using Cake.Core.Scripting;
 using Microsoft.CodeAnalysis;
@@ -56,16 +57,18 @@ namespace Cake.Scripting.Roslyn
                 .AddReferences(ReferencePaths.Select(r => r.FullPath));
 
             var roslynScript = CSharpScript.Create(code, options, _host.GetType());
+
             var compilation = roslynScript.GetCompilation();
             compilation = compilation.WithOptions(compilation.Options
                 .WithOptimizationLevel(OptimizationLevel.Debug)
+                .WithPlatform(Platform.AnyCpu)
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary));
 
             using (var assemblyStream = new MemoryStream())
             using (var symbolStream = new MemoryStream())
             {
                 _log.Verbose("Compiling build script for debugging...");
-                var emitOptions = new EmitOptions(false, DebugInformationFormat.PortablePdb);
+                var emitOptions = new EmitOptions(false, GetDebugFormat());
                 var result = compilation.Emit(assemblyStream, symbolStream, options: emitOptions);
                 if (result.Success)
                 {
@@ -74,6 +77,7 @@ namespace Cake.Scripting.Roslyn
                     symbolStream.Seek(0, SeekOrigin.Begin);
 
                     var assembly = _loader.LoadFromStream(assemblyStream, symbolStream);
+
                     var type = assembly.GetType(CompiledType);
                     var method = type.GetMethod(CompiledMethod, BindingFlags.Static | BindingFlags.Public);
 
@@ -89,6 +93,15 @@ namespace Cake.Scripting.Roslyn
                     throw new CakeException(message);
                 }
             }
+        }
+
+        private static DebugInformationFormat GetDebugFormat()
+        {
+#if NETCORE
+            return DebugInformationFormat.PortablePdb;
+#else
+            return DebugInformationFormat.Pdb;
+#endif
         }
     }
 }

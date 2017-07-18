@@ -39,7 +39,7 @@ namespace Cake.Scripting.Roslyn
             {
                 throw new ArgumentNullException(nameof(assembly));
             }
-            _log.Debug("Adding reference to {0}...", new FilePath(assembly.Location).GetFilename().FullPath);
+            _log.Debug("Adding assembly reference to {0}...", new FilePath(assembly.Location).GetFilename().FullPath);
             References.Add(assembly);
         }
 
