@@ -43,9 +43,9 @@ namespace Cake.Core.Reflection
             return assembly;
         }
 
-        public Assembly LoadFromStream(MemoryStream assemblyStream, MemoryStream symbolStream)
+        public Assembly LoadFromStream(Stream assemblyStream, Stream symbolStream)
         {
-            throw new NotImplementedException();
+            return AssemblyHelper.LoadAssembly(assemblyStream, symbolStream);
         }
     }
 }

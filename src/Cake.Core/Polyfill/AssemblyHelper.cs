@@ -8,6 +8,10 @@ using System.Reflection;
 using Cake.Core.IO;
 using Cake.Core.Reflection;
 
+#if NETCORE
+using System.Runtime.Loader;
+#endif
+
 namespace Cake.Core.Polyfill
 {
     internal static class AssemblyHelper
@@ -42,6 +46,15 @@ namespace Cake.Core.Polyfill
             return loader.LoadFromAssemblyPath(path.FullPath);
 #else
             return Assembly.LoadFrom(path.FullPath);
+#endif
+        }
+
+        public static Assembly LoadAssembly(Stream assemblyStream, Stream symbolStream)
+        {
+#if NETCORE
+            return AssemblyLoadContext.Default.LoadFromStream(assemblyStream, symbolStream);
+#else
+            return Assembly.Load(assemblyStream.ToArray(), symbolStream.ToArray());
 #endif
         }
     }

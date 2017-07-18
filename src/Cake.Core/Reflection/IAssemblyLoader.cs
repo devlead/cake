@@ -34,6 +34,6 @@ namespace Cake.Core.Reflection
         /// <param name="assemblyStream">The assembly stream.</param>
         /// <param name="symbolStream">The assembly symbol stream.</param>
         /// <returns>The loaded assembly.</returns>
-        Assembly LoadFromStream(MemoryStream assemblyStream, MemoryStream symbolStream);
+        Assembly LoadFromStream(Stream assemblyStream, Stream symbolStream);
     }
 }
