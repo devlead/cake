@@ -52,7 +52,7 @@ namespace Cake.Common.Tests.Fixtures.Tools
             if (platformFamily == PlatformFamily.Windows)
             {
                 Environment.WorkingDirectory = new DirectoryPath("C:/Working");
-                Environment.ApplicationRoot = "C:/Working/bin";
+                Environment.ApplicationRoot = Environment.WorkingDirectory.Combine("bin");
             }
 
             // Prepare the tool parameters.
