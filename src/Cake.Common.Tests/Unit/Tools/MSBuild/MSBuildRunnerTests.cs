@@ -766,13 +766,13 @@ namespace Cake.Common.Tests.Unit.Tools.MSBuild
             public void Should_Set_Working_Directory()
             {
                 // Given
-                var fixture = new MSBuildRunnerFixture(false, PlatformFamily.Windows);
+                var fixture = new MSBuildRunnerFixture(false, PlatformFamily.Linux);
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("C:/Working", result.Process.WorkingDirectory.FullPath);
+                Assert.Equal("/Working", result.Process.WorkingDirectory.FullPath);
             }
 
             [Fact]
