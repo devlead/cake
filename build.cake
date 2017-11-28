@@ -319,7 +319,7 @@ Task("Sign-Binaries")
         throw new InvalidOperationException("Could not resolve signing user.");
     }
 
-    var client = File("./tools/SignClient/tools/netcoreapp2.0/SignClient.dll");
+    var client = File("./tools/SignClient/tools/netcoreapp1.1/SignClient.dll");
     var settings = File("./signclient.json");
     var filter = File("./signclient.filter");
 
