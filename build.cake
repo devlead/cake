@@ -305,7 +305,7 @@ Task("Sign-Binaries")
     .IsDependentOn("Zip-Files")
     .IsDependentOn("Create-Chocolatey-Packages")
     .IsDependentOn("Create-NuGet-Packages")
-    .WithCriteria(() => parameters.ShouldPublish && !parameters.SkipSigning)
+    //.WithCriteria(() => parameters.ShouldPublish && !parameters.SkipSigning)
     .Does(() =>
 {
     // Get the secret.
@@ -319,7 +319,7 @@ Task("Sign-Binaries")
         throw new InvalidOperationException("Could not resolve signing user.");
     }
 
-    var client = File("./tools/SignClient/tools/netcoreapp1.1/SignClient.dll");
+    var client = MakeAbsolute(GetFiles("./tools/SignClient*/tools/netcoreapp1.1/SignClient.dll").FirstOrDefault() ?? throw new Exception("Failed to locate sign tool"));
     var settings = File("./signclient.json");
     var filter = File("./signclient.filter");
 
@@ -334,8 +334,8 @@ Task("Sign-Binaries")
 
         // Build the argument list.
         var arguments = new ProcessArgumentBuilder()
-            .AppendQuoted(MakeAbsolute(client.Path).FullPath)
-            .Append("zip")
+            .AppendQuoted(client.FullPath)
+            .Append("sign")
             .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
             .AppendSwitchQuoted("-f", MakeAbsolute(filter).FullPath)
