@@ -9,7 +9,7 @@
 #tool "nuget:https://www.nuget.org/api/v2?package=coveralls.io&version=1.3.4"
 #tool "nuget:https://www.nuget.org/api/v2?package=OpenCover&version=4.6.519"
 #tool "nuget:https://www.nuget.org/api/v2?package=ReportGenerator&version=2.4.5"
-#tool "nuget:https://www.nuget.org/api/v2?package=SignClient&version=0.5.0-beta4&prerelease"
+#tool "nuget:https://www.nuget.org/api/v2?package=SignClient&version=0.9.0"
 
 // Load other scripts.
 #load "./build/parameters.cake"
@@ -313,8 +313,13 @@ Task("Sign-Binaries")
     if(string.IsNullOrWhiteSpace(secret)) {
         throw new InvalidOperationException("Could not resolve signing secret.");
     }
+    // Get the user.
+    var user = EnvironmentVariable("SIGNING_USER");
+    if(string.IsNullOrWhiteSpace(user)) {
+        throw new InvalidOperationException("Could not resolve signing user.");
+    }
 
-    var client = File("./tools/SignClient/tools/SignClient.dll");
+    var client = File("./tools/SignClient/tools/netcoreapp2.0/SignClient.dll");
     var settings = File("./signclient.json");
     var filter = File("./signclient.filter");
 
@@ -335,6 +340,7 @@ Task("Sign-Binaries")
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
             .AppendSwitchQuoted("-f", MakeAbsolute(filter).FullPath)
             .AppendSwitchQuotedSecret("-s", secret)
+            .AppendSwitchQuotedSecret("-r", user)
             .AppendSwitchQuoted("-n", "Cake")
             .AppendSwitchQuoted("-d", "Cake (C# Make) is a cross platform build automation system.")
             .AppendSwitchQuoted("-u", "https://cakebuild.net");
