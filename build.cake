@@ -173,17 +173,28 @@ Task("Run-Unit-Tests")
         var projectName = project.GetFilenameWithoutExtension().FullPath;
 
         FilePath
-            testResultsCore = MakeAbsolute(parameters.Paths.Directories.TestResults.CombineWithFilePath($"{projectName}_core_TestResults.xml")),
+            testResultsCore2 = MakeAbsolute(parameters.Paths.Directories.TestResults.CombineWithFilePath($"{projectName}_core_TestResults2.xml")),
+            testResultsCore3 = MakeAbsolute(parameters.Paths.Directories.TestResults.CombineWithFilePath($"{projectName}_core_TestResults3.xml")),
             testResultsFull = MakeAbsolute(parameters.Paths.Directories.TestResults.CombineWithFilePath($"{projectName}_full_TestResults.xml"));
 
-        // .NET Core
+        // .NET Core 2
         DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings
         {
             Framework = "netcoreapp2.0",
             NoBuild = true,
             NoRestore = true,
             Configuration = parameters.Configuration,
-            ArgumentCustomization = args=>args.Append($"--logger trx;LogFileName=\"{testResultsCore}\"")
+            ArgumentCustomization = args=>args.Append($"--logger trx;LogFileName=\"{testResultsCore2}\"")
+        });
+
+        // .NET Core 3
+        DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings
+        {
+            Framework = "netcoreapp3.0",
+            NoBuild = true,
+            NoRestore = true,
+            Configuration = parameters.Configuration,
+            ArgumentCustomization = args=>args.Append($"--logger trx;LogFileName=\"{testResultsCore3}\"")
         });
 
         // .NET Framework/Mono
@@ -403,11 +414,12 @@ Task("Create-NuGet-Packages")
                                 .ToArray()
     });
 
-    DotNetCorePack("./src/Cake/Cake.Tool.csproj", new DotNetCorePackSettings {
+    DotNetCorePack("./src/Cake/Cake.csproj", new DotNetCorePackSettings {
         Configuration = parameters.Configuration,
         OutputDirectory = parameters.Paths.Directories.NuGetRoot,
         IncludeSymbols = true,
-        MSBuildSettings = msBuildSettings
+        MSBuildSettings = msBuildSettings,
+        ArgumentCustomization = arg => arg.Append("/p:PackAsTool=true")
     });
 });
 

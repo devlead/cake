@@ -1,11 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>Cake</AssemblyName>
-    <TargetFrameworks Condition=" '$(PackAsTool)' != 'true'">net461;netcoreapp2.0;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(PackAsTool)' != 'true'">net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <PlatformTarget>AnyCpu</PlatformTarget>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(PackAsTool)' == 'true'">
+    <ToolCommandName>dotnet-cake</ToolCommandName>
+    <PackageId>Cake.Tool</PackageId>
+    <PackageDescription>The Cake .NET Core Global Tool.</PackageDescription>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+  </PropertyGroup>
+
   <Import Project="$(MSBuildThisFileDirectory)..\Shared.msbuild" />
   <!-- Project references -->
   <ItemGroup>
