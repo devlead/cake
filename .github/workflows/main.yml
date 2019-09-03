@@ -18,5 +18,5 @@ jobs:
     - name: Build Cake
       run: |
         dotnet tool install --tool-path tools Cake.Tool
-        tools/dotnet-cake build.cake --bootstrap
-        tools/dotnet-cake build.cake
+        ./tools/dotnet-cake build.cake --bootstrap
+        ./tools/dotnet-cake build.cake
