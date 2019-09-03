@@ -1,0 +1,22 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.0.100-preview8-013656' # SDK Version to use.
+    - name: Build Cake
+      run: |
+        dotnet tool install -g Cake.Tool
+        dotnet cake build.cake --bootstrap
+        dotnet cake build.cake
