@@ -21,5 +21,6 @@ jobs:
         dotnet tool install -g Cake.Tool
     - name: Build Cake
       run: |
+        export PATH="$PATH:$HOME/.dotnet/tools"
         dotnet cake build.cake --bootstrap
         dotnet cake build.cake
