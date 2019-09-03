@@ -16,5 +16,4 @@ jobs:
       with:
         dotnet-version: '2.1.701' # SDK Version to use.
     - name: Build Cake
-      run.shell: pwsh
-      run: build.ps1
+      pwsh: build.ps1
