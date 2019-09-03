@@ -14,6 +14,6 @@ jobs:
         dotnet-version: '2.1.701' # SDK Version to use.
     - name: Build Cake
       run: |
-        dotnet tool install -g Cake.Tool
-        dotnet cake build.cake --bootstrap
-        dotnet cake build.cake
+        dotnet tool install --tool-path tools Cake.Tool
+        tools/dotnet-cake build.cake --bootstrap
+        tools/dotnet cake build.cake
