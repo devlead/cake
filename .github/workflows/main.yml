@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-dotnet@v1
+    - uses: actions/setup-dotnet@v1.0.2
       with:
         dotnet-version: '3.0.100-preview8-013656' # SDK Version to use.
     - name: Install Cake
@@ -21,6 +21,5 @@ jobs:
         dotnet tool install -g Cake.Tool
     - name: Build Cake
       run: |
-        export PATH="$PATH:$HOME/.dotnet/tools"
         dotnet cake build.cake --bootstrap
         dotnet cake build.cake
