@@ -19,13 +19,22 @@ public class BuildVersion
 
         if (!parameters.SkipGitVersion)
         {
+            // Temp Workaround GitVersion Azure Pipelines
+            var tfBuild = context.TFBuild();
+            string sourceBranch = string.Empty;
+            if ((tfBuild.IsRunningOnAzurePipelinesHosted || tfBuild.IsRunningOnAzurePipelines) && tfBuild.Environment.PullRequest.IsPullRequest)
+            {
+                 sourceBranch = $"PullRequest{tfBuild.Environment.PullRequest.Number}";
+            }
+
             context.Information("Calculating Semantic Version");
             if (!parameters.IsLocalBuild || parameters.IsPublishBuild || parameters.IsReleaseBuild)
             {
                 context.GitVersion(new GitVersionSettings{
                     UpdateAssemblyInfoFilePath = "./src/SolutionInfo.cs",
                     UpdateAssemblyInfo = true,
-                    OutputType = GitVersionOutput.BuildServer
+                    OutputType = GitVersionOutput.BuildServer,
+                    EnvironmentVariables = { {"BUILD_SOURCEBRANCH", sourceBranch } }
                 });
 
                 version = context.EnvironmentVariable("GitVersion_MajorMinorPatch");
@@ -36,6 +45,7 @@ public class BuildVersion
             GitVersion assertedVersions = context.GitVersion(new GitVersionSettings
             {
                 OutputType = GitVersionOutput.Json,
+                EnvironmentVariables = { {"BUILD_SOURCEBRANCH", sourceBranch } }
             });
 
             version = assertedVersions.MajorMinorPatch;
