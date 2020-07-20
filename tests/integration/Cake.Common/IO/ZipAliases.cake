@@ -120,7 +120,7 @@ Task("Cake.Common.IO.ZipAliases.ZipUnzip.InValidMinLastWriteTime")
     .Does(() =>
 {
     // Given
-    var givenDate = new DateTime(1979, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    var givenDate = new DateTime(1979, 12, 31, 23, 0, 0, DateTimeKind.Utc);
     var expectedDate = new DateTime(1980, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     var targetPath = Paths.Temp.Combine("./Cake.Common.IO.ZipAliases/InValidMinLastWriteTime");
     var targetFile = targetPath.CombineWithFilePath("testfile.zip");
@@ -145,7 +145,7 @@ Task("Cake.Common.IO.ZipAliases.ZipUnzip.InValidMaxLastWriteTime")
     .Does(() =>
 {
     // Given
-    var givenDate = new DateTime(2108, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    var givenDate = new DateTime(2108, 12, 31, 0, 0, 0, DateTimeKind.Utc);
     var expectedDate = new DateTime(1980, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     var targetPath = Paths.Temp.Combine("./Cake.Common.IO.ZipAliases/InValidMaxLastWriteTime");
     var targetFile = targetPath.CombineWithFilePath("testfile.zip");
