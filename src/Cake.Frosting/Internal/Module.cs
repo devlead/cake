@@ -29,7 +29,7 @@ namespace Cake.Frosting
 
             // Logging
             registry.RegisterType<CakeLog>().As<ICakeLog>().Singleton();
-            registry.RegisterType<DefaultConsole>().As<IConsole>().Singleton();
+            registry.RegisterType<CakeConsole>().As<IConsole>().Singleton();
 
             // Configuration
             registry.RegisterType<CakeConfigurationProvider>().AsSelf().Singleton();

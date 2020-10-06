@@ -30,6 +30,7 @@ namespace Cake.Frosting
         /// Runs the task using the specified context.
         /// </summary>
         /// <param name="context">The context.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public virtual Task RunAsync(T context)
         {
             return Task.CompletedTask;

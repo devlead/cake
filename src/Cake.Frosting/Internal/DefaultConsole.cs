@@ -30,7 +30,7 @@ namespace Cake.Frosting.Internal
         }
 
         /// <summary>
-        /// Gets if console supports ANSI escape codes.
+        /// Gets a value indicating whether gets if console supports ANSI escape codes.
         /// </summary>
         public bool SupportAnsiEscapeCodes => false;
 
@@ -38,7 +38,7 @@ namespace Cake.Frosting.Internal
         /// Writes the text representation of the specified array of objects to the
         /// console output using the specified format information.
         /// </summary>
-        /// <param name="format">A composite format string</param>
+        /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
         public void Write(string format, params object[] arg)
         {
@@ -50,7 +50,7 @@ namespace Cake.Frosting.Internal
         /// by the current line terminator, to the console output using the specified
         /// format information.
         /// </summary>
-        /// <param name="format">A composite format string</param>
+        /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
         public void WriteLine(string format, params object[] arg)
         {
@@ -61,7 +61,7 @@ namespace Cake.Frosting.Internal
         /// Writes the text representation of the specified array of objects to the
         /// console error output using the specified format information.
         /// </summary>
-        /// <param name="format">A composite format string</param>
+        /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
         public void WriteError(string format, params object[] arg)
         {
@@ -73,7 +73,7 @@ namespace Cake.Frosting.Internal
         /// by the current line terminator, to the console error output using the
         /// specified format information.
         /// </summary>
-        /// <param name="format">A composite format string</param>
+        /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
         public void WriteErrorLine(string format, params object[] arg)
         {

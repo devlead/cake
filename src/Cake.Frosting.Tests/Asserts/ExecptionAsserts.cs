@@ -12,7 +12,7 @@ namespace Xunit
         public static void IsArgumentNullException(Exception exception, string parameterName)
         {
             Assert.IsType<ArgumentNullException>(exception);
-            Assert.Equal(parameterName, ((ArgumentNullException) exception).ParamName);
+            Assert.Equal(parameterName, ((ArgumentNullException)exception).ParamName);
         }
     }
 }

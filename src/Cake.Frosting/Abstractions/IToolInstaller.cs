@@ -16,7 +16,7 @@ namespace Cake.Frosting
         /// Tries to install the specified <see cref="PackageReference"/> using
         /// the most suitable <see cref="IPackageInstaller"/>.
         /// </summary>
-        /// <param name="tool"></param>
+        /// <param name="tool">Tool to install.</param>
         void Install(PackageReference tool);
     }
 }

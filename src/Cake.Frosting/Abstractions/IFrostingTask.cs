@@ -18,6 +18,7 @@ namespace Cake.Frosting
         /// Runs the task using the specified context.
         /// </summary>
         /// <param name="context">The context.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         Task RunAsync(ICakeContext context);
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace Cake.Frosting
         /// <summary>
         /// The error handler to be executed if an exception occurs in the task.
         /// </summary>
-        /// <param name="exception">The exception</param>
+        /// <param name="exception">The exception.</param>
         /// <param name="context">The context.</param>
         void OnError(Exception exception, ICakeContext context);
 

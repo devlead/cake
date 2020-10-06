@@ -188,8 +188,7 @@ namespace Cake.Frosting.Tests.Unit.Extensions
 
                 // Then
                 services.Received(1).RegisterInstance(
-                    Arg.Is<CakeHostOptions>(o => o.WorkingDirectory.FullPath == expected
-                ));
+                    Arg.Is<CakeHostOptions>(o => o.WorkingDirectory.FullPath == expected));
             }
         }
     }

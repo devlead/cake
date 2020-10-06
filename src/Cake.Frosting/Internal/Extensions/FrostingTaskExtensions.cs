@@ -81,7 +81,8 @@ namespace Cake.Frosting.Internal
                 }
 
                 taskType = taskType.BaseType;
-            } while (taskType != null);
+            }
+            while (taskType != null);
 
             return false;
         }
@@ -98,7 +99,8 @@ namespace Cake.Frosting.Internal
                 }
 
                 taskType = taskType.BaseType;
-            } while (taskType != null);
+            }
+            while (taskType != null);
 
             return false;
         }

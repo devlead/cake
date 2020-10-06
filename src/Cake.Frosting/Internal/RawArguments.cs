@@ -46,10 +46,11 @@ namespace Cake.Frosting.Internal
         /// </summary>
         /// <param name="name">The argument name.</param>
         /// <returns>The argument value.</returns>
-        public string GetArgument(string name)
+        public ICollection<string> GetArguments(string name)
         {
             return _arguments.ContainsKey(name)
-                ? _arguments[name] : null;
+                ? new[] { _arguments[name] }
+                : Array.Empty<string>();
         }
     }
 }

@@ -17,8 +17,7 @@ namespace Cake.Frosting.Internal.Commands
         public RunCommand(
             IFrostingContext context,
             IExecutionStrategy strategy,
-            ICakeReportPrinter printer
-            )
+            ICakeReportPrinter printer)
         {
             _context = context;
             _strategy = strategy;
