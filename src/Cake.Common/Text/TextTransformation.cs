@@ -60,7 +60,6 @@ namespace Cake.Common.Text
         /// </summary>
         /// <param name="path">The <see cref="FilePath"/> to save the text transformation to.</param>
         /// <param name="encoding">The text encoding.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Stream writer leaves stream open.")]
         public void Save(FilePath path, Encoding encoding)
         {
             if (path == null)
@@ -74,10 +73,31 @@ namespace Cake.Common.Text
             // Render the content to the file.
             var file = _fileSystem.GetFile(path);
             using (var stream = file.OpenWrite())
+            {
+                Save(stream, encoding);
+            }
+        }
+
+        /// <summary>
+        /// Saves the text transformation to a stream.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> to save the text transformation to.</param>
+        /// <param name="encoding">The text encoding.</param>
+        public void Save(Stream stream, Encoding encoding)
+        {
             using (var writer = new StreamWriter(stream, encoding, 1024, true))
             {
                 writer.Write(Template.Render());
             }
+        }
+
+        /// <summary>
+        /// Saves the text transformation to a stream.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/> to save the text transformation to.</param>
+        public void Save(Stream stream)
+        {
+            Save(stream, new UTF8Encoding(false));
         }
 
         /// <summary>

@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Autofac;
 using Cake.Cli;
 using Cake.Commands;
+using Cake.Commands.Init;
 using Cake.Core;
+using Cake.Core.Configuration;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Features.Bootstrapping;
@@ -61,6 +63,20 @@ namespace Cake
                 config.AddExample(new[] { string.Empty });
                 config.AddExample(new[] { "build.cake", "--verbosity", "quiet" });
                 config.AddExample(new[] { "build.cake", "--tree" });
+
+                config.AddCommand<InitCommand>("init")
+                    .WithDescription("Initializes files in current directory based on given template.")
+                    .WithExample(new[] { "init", "githubactions" });
+
+                /*config.AddBranch<InitCommandSettings>(
+                    "init",
+                    branchConfig =>
+                    {
+                        branchConfig
+                            .AddCommand<ListCommand>("list")
+                            .WithDescription("Lists available init templates.")
+                            .WithExample(new[] { "init", "list" });
+                    });*/
             });
 
             return await app.RunAsync(args);

@@ -4,6 +4,7 @@
 
 using System.Text;
 using Cake.Common.Tests.Fixtures;
+using Cake.Core.IO;
 using Cake.Testing;
 using NSubstitute;
 using Xunit;
@@ -37,9 +38,10 @@ namespace Cake.Common.Tests.Unit.Text
                 // Given
                 var fixture = new TextTransformationFixture();
                 var transformation = fixture.CreateTextTransformation();
+                FilePath path = null;
 
                 // When
-                var result = Record.Exception(() => transformation.Save(null));
+                var result = Record.Exception(() => transformation.Save(path));
 
                 // Then
                 AssertEx.IsArgumentNullException(result, "path");
